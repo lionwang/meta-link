@@ -1,8 +1,24 @@
-[package]
-name = "meta-link"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+members = [
+    "mqtt-link",
+    "rmqtt",
+    "rmqtt-plugins/rmqtt-acl",
+    "rmqtt-plugins/rmqtt-web-hook",
+    "rmqtt-plugins/rmqtt-auth-http",
+    "rmqtt-plugins/rmqtt-cluster-broadcast",
+    "rmqtt-plugins/rmqtt-cluster-raft",
+    "rmqtt-plugins/rmqtt-counter",
+    "rmqtt-plugins/rmqtt-http-api",
+    "rmqtt-macros"
+]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
+[patch.crates-io]
+rmqtt = { path = "rmqtt" }
+rmqtt-macros = { path = "rmqtt-macros" }
+rmqtt-acl = { path = "rmqtt-plugins/rmqtt-acl" }
+rmqtt-web-hook = { path = "rmqtt-plugins/rmqtt-web-hook" }
+rmqtt-auth-http = { path = "rmqtt-plugins/rmqtt-auth-http" }
+rmqtt-cluster-broadcast = { path = "rmqtt-plugins/rmqtt-cluster-broadcast" }
+rmqtt-cluster-raft = { path = "rmqtt-plugins/rmqtt-cluster-raft" }
+rmqtt-counter = { path = "rmqtt-plugins/rmqtt-counter" }
+rmqtt-http-api = { path = "rmqtt-plugins/rmqtt-http-api" }

@@ -1,0 +1,49 @@
+[package]
+name = "mqtt-link"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[[bin]]
+name = "mqtt-link"
+path = "src/server.rs"
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+lto = true
+opt-level = 's'
+codegen-units = 1
+
+[target.'cfg(linux)'.dependencies]
+tikv-jemallocator = "0.5"
+
+[dependencies]
+rustls = "0.19"
+
+##mqtt broker
+rmqtt = "0.2"
+##plugins
+rmqtt-acl = "0.1"
+rmqtt-web-hook = "0.1"
+rmqtt-auth-http = "0.1"
+rmqtt-cluster-broadcast = "0.1"
+rmqtt-cluster-raft = "0.1"
+rmqtt-counter = "0.1"
+rmqtt-http-api = "0.1"
+#rmqtt-plugin-template = "0.1"
+
+[package.metadata.plugins]
+rmqtt-acl = { default_startup = true, immutable = true }
+rmqtt-http-api = { default_startup = true }
+rmqtt-counter = { default_startup = true }
+rmqtt-web-hook = { }
+rmqtt-auth-http = { }
+rmqtt-cluster-broadcast = { immutable = true }
+rmqtt-cluster-raft = { immutable = true }
+#rmqtt-plugin-template = { }
+
+[build-dependencies]
+toml = "0.5"
+chrono = { version = "0.4", default-features = false, features = [] }
